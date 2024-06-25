@@ -8,7 +8,7 @@ class Person(models.Model):
 
 class Blog(models.Model):
     post = models.TextField()
-    author = models.CharField(max_length=35,)
+    author = models.CharField(max_length=35, )
 
 
 class WeatherForecast(models.Model):
@@ -29,3 +29,82 @@ class Recipe(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True,
     )
+
+
+class Product(models.Model):
+    name = models.CharField(
+        max_length=70,
+    )
+
+    description = models.TextField()
+
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+    )  # NUMERIC/DECIMAL(10, 2)
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+
+class UserProfile(models.Model):
+    username = models.CharField(
+        max_length=65,
+        unique=True
+    )
+
+    first_name = models.CharField(
+        max_length=40,
+    )
+
+    last_name = models.CharField(
+        max_length=40,
+    )
+
+    email = models.EmailField(
+        unique=True,
+        default="students@softuni.bg",
+    )
+
+    bio = models.TextField(
+        max_length=120,
+    )
+
+    profile_image_url = models.URLField()
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+
+class Exercise(models.Model):
+    name = models.CharField(
+        max_length=100,
+    )
+
+    description = models.TextField()
+
+    duration_minutes = models.PositiveIntegerField()
+
+    difficulty_level = models.CharField(
+        max_length=20,
+    )
+
+    equipment = models.CharField(
+        max_length=90,
+    )
+
+    video_url = models.URLField(
+        null=True,
+        blank=True,
+    )
+
+    calories_burned = models.PositiveIntegerField(
+        default=1,
+    )
+
+    is_favorite = models.BooleanField(
+        default=False,
+    )
+
