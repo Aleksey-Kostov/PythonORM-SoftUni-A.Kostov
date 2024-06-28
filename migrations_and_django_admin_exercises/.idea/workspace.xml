@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10269613-d4cf-48a4-bfc7-d9bf8cf27199" name="Changes" comment="Tasks from course PythonORM">
-      <change beforePath="$PROJECT_DIR$/../django_models_basics_exercises/main_app/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../django_models_basics_exercises/main_app/migrations/0002_blog.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../django_models_basics_exercises/main_app/migrations/0003_weatherforecast.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../django_models_basics_exercises/main_app/migrations/0004_recipe.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../django_models_basics_exercises/main_app/migrations/0005_product.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../django_models_basics_exercises/main_app/migrations/0006_userprofile.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../django_models_basics_exercises/main_app/migrations/0007_exercise.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../django_models_basics_exercises/main_app/migrations/0008_book.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../django_models_basics_exercises/main_app/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../django_models_basics_exercises/submission-21-59_25.06.24.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../django_models_basics_exercises/submission-21-59_25.06.24.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../django_models_basics_exercises/submission-22-11_25.06.24.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orm_skeleton/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/orm_skeleton/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,20 +26,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/limp_/PycharmProjects/PythonORM-SoftUni-A.Kostov/django_models_basics_exercises",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/limp_/PycharmProjects/PythonORM-SoftUni-A.Kostov/migrations_and_django_admin_exercises&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="migrations_and_django_admin_exercises" type="Python.DjangoServer" factoryName="Django server">
       <module name="migrations_and_django_admin_exercises" />
@@ -92,7 +84,26 @@
       <updated>1719408687692</updated>
       <workItem from="1719408688722" duration="1340000" />
       <workItem from="1719415623415" duration="1585000" />
+      <workItem from="1719420560143" duration="157000" />
+      <workItem from="1719574646789" duration="1361000" />
     </task>
+    <task id="LOCAL-00001" summary="Tasks from course PythonORM">
+      <option name="closed" value="true" />
+      <created>1719420615466</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1719420615466</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Tasks from course PythonORM">
+      <option name="closed" value="true" />
+      <created>1719420665705</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1719420665705</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
