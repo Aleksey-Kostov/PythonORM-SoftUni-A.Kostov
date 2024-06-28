@@ -177,3 +177,49 @@ class SmartPhone(models.Model):
         default="No category",
     )
 
+class StatusChoice(models.TextChoices):
+    PENDING = "P", "Pending"
+    COMPLETED = "CO", "Completed"
+    CANCELLED = "CA", "CANCELLED"
+
+
+class Order(models.Model):
+    product_name = models.CharField(
+        max_length=30,
+    )
+
+    customer_name = models.CharField(
+        max_length=100,
+    )
+
+    order_date = models.DateField()
+
+    status = models.CharField(
+        max_length=30,
+        choices=StatusChoice.choices
+    )
+
+    amount = models.PositiveIntegerField(
+        default=1,
+    )
+
+    product_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+    )
+
+    total_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+    )
+
+    warranty = models.CharField(
+        max_length=100,
+        default="No warranty",
+    )
+
+    delivery = models.DateField(
+        null=True,
+        blank=True,
+    )
