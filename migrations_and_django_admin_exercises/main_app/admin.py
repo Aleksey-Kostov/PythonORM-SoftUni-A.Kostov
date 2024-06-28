@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from main_app.models import EventRegistration, Movie, Student
+from main_app.models import EventRegistration, Movie, Student, Supplier
 
 
 @admin.register(EventRegistration)
@@ -21,7 +21,7 @@ class MovieAdmin(admin.ModelAdmin):
 class StudentAdmin(admin.ModelAdmin):
     list_display = ("first_name", "last_name", "age", "grade")
     list_filter = ("age", "grade", "date_of_birth")
-    search_fields = ("first_name", )
+    search_fields = ("first_name",)
 
     fieldsets = (
         ('Personal Information', {
@@ -29,7 +29,21 @@ class StudentAdmin(admin.ModelAdmin):
             # 'classes': ('collapse', ) - bonus
         }),
         ('Academic Information', {
-            'fields': ('grade', ),
+            'fields': ('grade',),
         })
+    )
+
+
+@admin.register(Supplier)
+class SupplierAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'phone')
+    list_filter = ('name', 'phone')
+    search_fields = ('email', 'contact_person', 'phone')
+    list_per_page = 20
+
+    fieldsets = (
+        ('Information', {
+            'fields': ('name', 'contact_person', 'email', 'address'),
+        }),
     )
 
