@@ -7,3 +7,13 @@ class Shoe(models.Model):
     )
 
     size = models.PositiveIntegerField()
+
+
+class UniqueBrands(models.Model):
+    brand = models.CharField(
+        max_length=25,
+        unique=True,
+    )
+
+
+
