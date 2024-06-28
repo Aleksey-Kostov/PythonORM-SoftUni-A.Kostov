@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10269613-d4cf-48a4-bfc7-d9bf8cf27199" name="Changes" comment="Tasks from course PythonORM">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ef6ff54c-c755-4715-8268-e9f16696b58c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ef6ff54c-c755-4715-8268-e9f16696b58c.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/admin.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +27,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Django Server.migrations_and_django_admin_exercises.executor": "Run",
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ignore.virus.scanning.warn.message": "true",
@@ -53,6 +53,7 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="orm_skeleton.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -90,7 +91,8 @@
       <workItem from="1719408688722" duration="1340000" />
       <workItem from="1719415623415" duration="1585000" />
       <workItem from="1719420560143" duration="157000" />
-      <workItem from="1719574646789" duration="3577000" />
+      <workItem from="1719574646789" duration="4224000" />
+      <workItem from="1719580025269" duration="1433000" />
     </task>
     <task id="LOCAL-00001" summary="Tasks from course PythonORM">
       <option name="closed" value="true" />
@@ -172,7 +174,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719578781761</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Tasks from course PythonORM">
+      <option name="closed" value="true" />
+      <created>1719579552883</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1719579552883</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
