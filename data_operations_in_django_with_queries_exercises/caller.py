@@ -5,7 +5,7 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
 django.setup()
 
-from main_app.models import Pet, Artifact
+from main_app.models import Pet, Artifact, Location
 
 
 # Create queries within functions
@@ -36,3 +36,24 @@ def rename_artifact(artifact: Artifact, new_name: str):
 def delete_all_artifacts():
     Artifact.objects.all().delete()
 
+
+def show_all_locations() -> str:
+    locations = Location.objects.all().order_by('-id')
+
+    return "\n".join(str(l) for l in locations)
+
+
+def new_capital() -> None:
+    # Location.objects.filter(id=1).update(is_capital=True)
+
+    location = Location.objects.first()  # SELECT * FROM locations LIMIT 1
+    location.is_capital = True
+    location.save()
+
+
+def get_capitals():
+    return Location.objects.filter(is_capital=True).values('name')
+
+
+def delete_first_location() -> None:
+    Location.objects.first().delete()
