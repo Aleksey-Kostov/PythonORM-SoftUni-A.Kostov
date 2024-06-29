@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10269613-d4cf-48a4-bfc7-d9bf8cf27199" name="Changes" comment="Tasks from course PythonORM">
-      <change beforePath="$PROJECT_DIR$/main_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +30,7 @@
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/limp_/PycharmProjects/PythonORM-SoftUni-A.Kostov/migrations_and_django_admin_exercises",
+    "last_opened_file_path": "C:/Users/limp_/PycharmProjects/PythonORM-SoftUni-A.Kostov/data_operations_in_django_with_queries_exercises",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -91,7 +91,8 @@
       <workItem from="1719415623415" duration="1585000" />
       <workItem from="1719420560143" duration="157000" />
       <workItem from="1719574646789" duration="4224000" />
-      <workItem from="1719580025269" duration="5300000" />
+      <workItem from="1719580025269" duration="5446000" />
+      <workItem from="1719663879690" duration="847000" />
     </task>
     <task id="LOCAL-00001" summary="Tasks from course PythonORM">
       <option name="closed" value="true" />
@@ -261,7 +262,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719585097867</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Tasks from course PythonORM">
+      <option name="closed" value="true" />
+      <created>1719585371767</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1719585371767</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
