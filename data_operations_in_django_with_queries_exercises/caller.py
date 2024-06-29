@@ -15,4 +15,24 @@ def create_pet(name: str, species: str) -> str:
 
 
 def create_artifact(name: str, origin: str, age: int, description: str, is_magical: bool):
-    artifact = Artifact.objects.create(name=name, origin=origin, age=age, description=description, is_magical=is_magical)
+    artifact = Artifact.objects.create(name=name,
+                                       origin=origin,
+                                       age=age,
+                                       description=description,
+                                       is_magical=is_magical)
+
+    return f"The artifact {artifact.name} is {artifact.age} years old!"
+
+
+def rename_artifact(artifact: Artifact, new_name: str):
+    # Artifact.objects.filter(is_magical=True, age__gt=250, pk=artifact.pk).update(name=new_name)
+    # UPDATE artefact SET name = new_name WHERE is_magical=TRUE && age > 250 && id = 1
+
+    if artifact.is_magical and artifact.age > 250:
+        artifact.name = new_name
+        artifact.save()
+
+
+def delete_all_artifacts():
+    Artifact.objects.all().delete()
+
