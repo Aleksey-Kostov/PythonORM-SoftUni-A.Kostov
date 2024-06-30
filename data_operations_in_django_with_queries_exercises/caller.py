@@ -57,3 +57,4 @@ def get_capitals():
 
 def delete_first_location() -> None:
     Location.objects.first().delete()
+
