@@ -5,8 +5,8 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
 django.setup()
 
-from main_app.models import Pet, Artifact, Location, Car, Task, HotelRoom
-from django.db.models import QuerySet
+from main_app.models import Pet, Artifact, Location, Car, Task, HotelRoom, Character
+from django.db.models import QuerySet, F
 
 
 # Create queries within functions
@@ -136,3 +136,69 @@ def delete_last_room() -> None:
 
     if not room.is_reserved:
         room.delete()
+
+
+def update_characters() -> None:
+    Character.objects.filter(class_name="Mage").update(
+        level=F('level') + 3,
+        intelligence=F('intelligence') - 7
+    )
+
+    Character.objects.filter(class_name="Warrior").update(
+        hit_points=F('hit_points') / 2,
+        dexterity=F('dexterity') + 4
+    )
+
+    Character.objects.filter(class_name__in=["Assassin", "Scout"]).update(
+        inventory="The inventory is empty"
+    )
+    # UPDATE table
+    # SET
+    #   intelligence = intelligence - 7,
+    #   level = level + 3
+    # WHERE class_name IN ("Assassin", "Scout")
+
+
+def fuse_characters(first_character: Character, second_character: Character) -> None:
+    fusion_name = first_character.name + " " + second_character.name
+    class_name = "Fusion"
+    level = (first_character.level + second_character.level) // 2
+    strength = (first_character.strength + second_character.strength) * 1.2
+    dexterity = (first_character.dexterity + second_character.dexterity) * 1.4
+    intelligence = (first_character.intelligence + second_character.intelligence) * 1.5
+    hit_points = first_character.hit_points + second_character.hit_points
+
+    if first_character.class_name in ["Mage", "Scout"]:
+        inventory = "Bow of the Elven Lords, Amulet of Eternal Wisdom"
+    else:
+        inventory = "Dragon Scale Armor, Excalibur"
+
+    Character.objects.create(
+        name=fusion_name,
+        class_name=class_name,
+        level=level,
+        strength=strength,
+        dexterity=dexterity,
+        intelligence=intelligence,
+        hit_points=hit_points,
+        inventory=inventory
+    )
+
+    first_character.delete()
+    second_character.delete()
+
+
+def grand_dexterity() -> None:
+    Character.objects.update(dexterity=30)
+
+
+def grand_intelligence() -> None:
+    Character.objects.update(intelligence=40)
+
+
+def grand_strength() -> None:
+    Character.objects.update(strength=50)
+
+
+def delete_characters() -> None:
+    Character.objects.filter(inventory="The inventory is empty").delete()
