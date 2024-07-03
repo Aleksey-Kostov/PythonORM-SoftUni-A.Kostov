@@ -10,7 +10,6 @@ from main_app.choices import OperationSystemChoice, MealTypeChoice, DungeonDiffi
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
 django.setup()
 
-from helpers import populate_model_with_data
 from main_app.models import ArtworkGallery, Laptop, ChessPlayer, Meal, Dungeon, Workout
 
 
