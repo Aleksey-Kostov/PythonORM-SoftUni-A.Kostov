@@ -6,7 +6,8 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
 django.setup()
 
-from main_app.models import Author, Book, Artist, Song, Review, Product, Driver, DrivingLicense
+from main_app.models import Author, Book, Artist, Song, Review, Product, Driver, DrivingLicense, Registration, Car, \
+    Owner
 from django.db.models import QuerySet, Avg
 from datetime import date, timedelta
 
@@ -111,18 +112,18 @@ def get_drivers_with_expired_licenses(due_date: date) -> str:
     return drivers_with_expired_licenses
 
 
-# def register_car_by_owner(owner: Owner) -> str:
-#     registration = Registration.objects.filter(car__isnull=True).first()
-#     car = Car.objects.filter(registration__isnull=True).first()
-#
-#     car.owner = owner
-#
-#     car.save()
-#
-#     registration.registration_date = date.today()
-#     registration.car = car
-#
-#     registration.save()
-#
-#     return (f"Successfully registered {car.model} to {owner.name} "
-#             f"with registration number {registration.registration_number}.")
+def register_car_by_owner(owner: Owner) -> str:
+    registration = Registration.objects.filter(car__isnull=True).first()
+    car = Car.objects.filter(registration__isnull=True).first()
+
+    car.owner = owner
+
+    car.save()
+
+    registration.registration_date = date.today()
+    registration.car = car
+
+    registration.save()
+
+    return (f"Successfully registered {car.model} to {owner.name} "
+            f"with registration number {registration.registration_number}.")
