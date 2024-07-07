@@ -5,8 +5,8 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
 django.setup()
 
-from main_app.models import Author, Book, Artist, Song
-from django.db.models import QuerySet
+from main_app.models import Author, Book, Artist, Song, Review, Product
+from django.db.models import QuerySet, Avg
 
 
 def show_all_authors_with_their_books() -> str:
@@ -52,3 +52,42 @@ def remove_song_from_artist(artist_name: str, song_title: str) -> None:
 
     artist.songs.remove(song)
     # song.artists.remove(artist) the same
+
+
+def calculate_average_rating_for_product_by_name(product_name: str) -> float:
+    # product = Product.objects.get(name=product_name)
+    # reviews = product.reviews.all()
+    #
+    # total_rating = sum(r.rating for r in reviews)  # 5 + 1 => 6
+    # average_rating = total_rating / len(reviews)  # 6 / 2 => 3
+    #
+    # return average_rating
+
+    product = Product.objects.annotate(
+        average_rating=Avg('reviews__rating'),
+    ).get(name=product_name)
+
+    return product.average_rating
+
+    # SELECT
+    #   AVG(r.rating) AS average_rating,
+    # FROM
+    #   products
+    # LEFT JOIN
+    #   reviews
+    # ON
+    #   product.id == review.product_id
+    # GROUP BY
+    #   reviews.id
+
+
+def get_reviews_with_high_ratings(threshold: int) -> QuerySet[Review]:
+    return Review.objects.filter(rating__gte=threshold)
+
+
+def get_products_with_no_reviews() -> QuerySet[Product]:
+    return Product.objects.filter(reviews__isnull=True).order_by('-name')
+
+
+def delete_products_without_reviews() -> None:
+    get_products_with_no_reviews().delete()
