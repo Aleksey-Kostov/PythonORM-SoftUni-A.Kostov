@@ -1,12 +1,14 @@
 import os
+
 import django
 
 # Set up Django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
 django.setup()
 
-from main_app.models import Author, Book, Artist, Song, Review, Product
+from main_app.models import Author, Book, Artist, Song, Review, Product, Driver, DrivingLicense
 from django.db.models import QuerySet, Avg
+from datetime import date, timedelta
 
 
 def show_all_authors_with_their_books() -> str:
@@ -91,3 +93,36 @@ def get_products_with_no_reviews() -> QuerySet[Product]:
 
 def delete_products_without_reviews() -> None:
     get_products_with_no_reviews().delete()
+
+
+def calculate_licenses_expiration_dates() -> str:
+    licenses = DrivingLicense.objects.order_by('-license_number')
+
+    return "\n".join(str(l) for l in licenses)
+
+
+def get_drivers_with_expired_licenses(due_date: date) -> str:
+    expiration_cutoff_date = due_date - timedelta(days=365)
+
+    drivers_with_expired_licenses = Driver.objects.filter(
+        license__issue_date__gt=expiration_cutoff_date,
+    )
+
+    return drivers_with_expired_licenses
+
+
+# def register_car_by_owner(owner: Owner) -> str:
+#     registration = Registration.objects.filter(car__isnull=True).first()
+#     car = Car.objects.filter(registration__isnull=True).first()
+#
+#     car.owner = owner
+#
+#     car.save()
+#
+#     registration.registration_date = date.today()
+#     registration.car = car
+#
+#     registration.save()
+#
+#     return (f"Successfully registered {car.model} to {owner.name} "
+#             f"with registration number {registration.registration_number}.")
