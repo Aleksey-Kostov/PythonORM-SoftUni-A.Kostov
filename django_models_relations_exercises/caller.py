@@ -5,7 +5,8 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
 django.setup()
 
-from main_app.models import Author, Book
+from main_app.models import Author, Book, Artist, Song
+from django.db.models import QuerySet
 
 
 def show_all_authors_with_their_books() -> str:
@@ -30,3 +31,24 @@ def show_all_authors_with_their_books() -> str:
 
 def delete_all_authors_without_books() -> None:
     Author.objects.filter(book__isnull=True).delete()
+
+
+def add_song_to_artist(artist_name: str, song_title: str) -> None:
+    artist = Artist.objects.get(name=artist_name)  # SELECT * FROM artist WHERE name = "Eminem"
+    song = Song.objects.get(title=song_title)
+
+    artist.songs.add(song)  # remove, clear
+
+    # Artist.objects.get(name=artist_name).songs.add(Song.objects.get(title=song_title))
+
+
+def get_songs_by_artist(artist_name: str) -> QuerySet[Song]:
+    return Artist.objects.get(name=artist_name).songs.all().order_by("-id")
+
+
+def remove_song_from_artist(artist_name: str, song_title: str) -> None:
+    artist = Artist.objects.get(name=artist_name)  # SELECT * FROM artist WHERE name = "Eminem"
+    song = Song.objects.get(title=song_title)
+
+    artist.songs.remove(song)
+    # song.artists.remove(artist) the same
