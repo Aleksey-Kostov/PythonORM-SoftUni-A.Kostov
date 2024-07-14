@@ -11,7 +11,7 @@ class BaseCharacter(models.Model):
 
 class Mage(BaseCharacter):
     elemental_power = models.CharField(max_length=100)
-    spellbook = models.CharField(max_length=100)
+    spellbook_type = models.CharField(max_length=100)
 
 
 class Assassin(BaseCharacter):
