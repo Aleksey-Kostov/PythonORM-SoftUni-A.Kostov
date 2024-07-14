@@ -75,3 +75,4 @@ class FelbladeDemonHunter(DemonHunter):
     felblade_ability = models.CharField(
         max_length=100,
     )
+
