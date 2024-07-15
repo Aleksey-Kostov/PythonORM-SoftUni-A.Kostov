@@ -75,19 +75,19 @@ WSGI_APPLICATION = 'orm_skeleton.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "",
-#         "USER": "",
-#         "PASSWORD": "",
+#         "NAME": "advanced_django_model_techniques_exercises",
+#         "USER": "postgres-user",
+#         "PASSWORD": "password",
 #         "HOST": "localhost",
 #         "PORT": "5432",
 #     }
