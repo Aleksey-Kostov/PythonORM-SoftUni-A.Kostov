@@ -1,6 +1,8 @@
 import os
 import zipfile
 import datetime
+
+
 def pack():
     # Remove old archive
     for item in os.listdir('.'):
@@ -13,10 +15,13 @@ def pack():
                 file_path = os.path.join(root, file)
                 archive_path = os.path.relpath(file_path, '.')
                 current_dir = root.split('\\')[-1]
-                if file in ['requirements.txt', 'manage.py', 'caller.py']\
+                if file in ['requirements.txt', 'manage.py', 'caller.py'] \
                         or current_dir in ['main_app', 'orm_skeleton', 'migrations']:
-                    zipf.write(file_path, archive_path)
+                    if 'venv' not in file_path:
+                        zipf.write(file_path, archive_path)
 
     print('Submission created!')
+
+
 if __name__ == '__main__':
     pack()
