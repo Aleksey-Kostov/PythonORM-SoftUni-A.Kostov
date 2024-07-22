@@ -1,6 +1,8 @@
 from django.core.validators import MinLengthValidator, MinValueValidator, MaxValueValidator
 from django.db import models
 
+from main_app.custom_model_manager import AuthorManager
+
 
 class Author(models.Model):
     full_name = models.CharField(max_length=100, validators=[MinLengthValidator(3)])
@@ -8,6 +10,8 @@ class Author(models.Model):
     is_banned = models.BooleanField(default=False)
     birth_year = models.PositiveIntegerField(validators=[MinValueValidator(1900), MaxValueValidator(2005)])
     website = models.URLField(null=True, blank=True)
+
+    objects = AuthorManager()
 
     def __str__(self):
         return self.full_name
