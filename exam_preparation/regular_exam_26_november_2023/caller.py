@@ -5,7 +5,7 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
 django.setup()
 
-from main_app.models import Author, Review
+from main_app.models import Author
 from django.db.models import Count
 
 
@@ -18,10 +18,10 @@ def get_authors(search_name=None, search_email=None):
                    (full_name__icontains=search_name, email__icontains=search_email).order_by('-full_name'))
 
     elif search_name is not None:
-        authors = Author.objects.fiilter(full_name__icontains=search_name).order_by('-full_name')
+        authors = Author.objects.filter(full_name__icontains=search_name).order_by('-full_name')
 
     else:
-        authors = Author.objects.fiilter(email__icontains=search_email).order_by('-full_name')
+        authors = Author.objects.filter(email__icontains=search_email).order_by('-full_name')
 
     result = []
 
@@ -32,7 +32,7 @@ def get_authors(search_name=None, search_email=None):
 
 
 def get_top_publisher():
-    author = Author.objects.get_authors_by_article_count.first()
+    author = Author.objects.get_authors_by_article_count().first()
     if author is None or author.article_count == 0:
         return ""
 
