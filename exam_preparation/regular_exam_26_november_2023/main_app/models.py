@@ -7,7 +7,7 @@ class Author(models.Model):
     email = models.EmailField(unique=True)
     is_banned = models.BooleanField(default=False)
     birth_year = models.PositiveIntegerField(validators=[MinValueValidator(1900), MaxValueValidator(2005)])
-    website = models.URLField(Null=True, blank=True)
+    website = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return self.full_name
