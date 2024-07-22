@@ -19,8 +19,8 @@ class Article(models.Model):
         SCIENCE = 'Science', 'Science'
         EDUCATION = 'Education', 'Education'
 
-    title = models.CharField(max_length=200, validators=MinLengthValidator(5))
-    content = models.TextField(validators=MinLengthValidator(10))
+    title = models.CharField(max_length=200, validators=[MinLengthValidator(5)])
+    content = models.TextField(validators=[MinLengthValidator(10)])
     category = models.CharField(choices=ArticleCategory, default='Technology', max_length=10)
     authors = models.ManyToManyField(Author, related_name='article')
     published_on = models.DateTimeField(auto_now_add=True, editable=False)
@@ -30,8 +30,8 @@ class Article(models.Model):
 
 
 class Review(models.Model):
-    content = models.TextField(validators=MinLengthValidator(10))
-    rating = models.FloatField(validators=MinValueValidator(1.0), max_length=5.0)
+    content = models.TextField(validators=[MinLengthValidator(10)])
+    rating = models.FloatField(validators=[MinValueValidator(1.0)], max_length=5.0)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='reviews')
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='reviews')
     published_on = models.DateTimeField(auto_now_add=True, editable=False)
