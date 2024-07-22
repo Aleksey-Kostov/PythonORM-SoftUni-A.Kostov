@@ -13,14 +13,14 @@ class AuthorAdmin(admin.ModelAdmin):
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'published_on')
-    list_filter = 'category'
-    search_fields = 'title'
-    readonly_fields = 'published_on'
+    list_filter = ('category',)
+    search_fields = ('title',)
+    readonly_fields = ('published_on', )
 
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('author', 'article', 'rating', 'published_on',)
     list_filter = ('rating', 'published_on',)
-    search_fields = 'article__title'
-    readonly_fields = 'published_on'
+    search_fields = ('article__title',)
+    readonly_fields = ('published_on',)
