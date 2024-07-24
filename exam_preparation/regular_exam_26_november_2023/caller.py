@@ -25,7 +25,7 @@ def get_authors(search_name=None, search_email=None):
 
     result = []
 
-    [result.append(f"Author: {a.full_name}, email: {a.mail}, status: {'Banned' if a.is_banned else 'Not Banned'}")
+    [result.append(f"Author: {a.full_name}, email: {a.email}, status: {'Banned' if a.is_banned else 'Not Banned'}")
      for a in authors if authors]
 
     return "\n".join(result) if result else ""
