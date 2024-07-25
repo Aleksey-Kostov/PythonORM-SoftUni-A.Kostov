@@ -6,7 +6,7 @@ from django.db.models import Count
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
 django.setup()
 
-from main_app.models import TennisPlayer
+from main_app.models import TennisPlayer, Tournament, Match
 
 
 def get_tennis_players(search_name=None, search_country=None):
@@ -52,3 +52,37 @@ def get_tennis_player_by_matches_count():
 
     return ''
 
+
+def get_tournaments_by_surface_type(surface=None):
+    if surface is None:
+        return ''
+
+    tournaments = (Tournament.objects.prefetch_related('matches').annotate(num_matches=Count('matches'))
+                   .filter(surface_type__icontains=surface)).order_by('-start_date')
+
+    if tournaments is None:
+        return ''
+
+    result = []
+
+    [result.append(f"Tournament: {t.name}, start date: {t.start_date}, "
+                   f"matches: {t.num_matches}") for t in tournaments]
+
+    return '\n'.join(result) if result else ''
+
+
+def get_latest_match_info():
+    latest_match_info = Match.objects.prefetch_related('players').order_by('date_played', '-id').first()
+
+    if latest_match_info is None:
+        return ''
+
+    players = latest_match_info.players.order_by('full_name')
+    player1_full_name = players.first().full_name
+    player2_full_name = players.last().full_name
+    winner_full_name = "TBA" if latest_match_info.winner is None else latest_match_info.winner.full_name
+
+    return (f"Latest match played on: {latest_match_info.date_played}, "
+            f"tournament: {latest_match_info.tournament.name}, score: {latest_match_info.score}, players: "
+            f"{player1_full_name} vs {player2_full_name}, "
+            f"winner: {winner_full_name}, summary: {latest_match_info.summary}")
