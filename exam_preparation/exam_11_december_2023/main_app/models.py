@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MinLengthValidator, MinValueValidator, MaxValueValidator
 
+from main_app.custom_manager import TennisPlayerManager
+
 
 class TennisPlayer(models.Model):
     full_name = models.CharField(max_length=120, validators=[MinLengthValidator(5)])
@@ -8,6 +10,8 @@ class TennisPlayer(models.Model):
     country = models.CharField(max_length=100, validators=[MinLengthValidator(2)])
     ranking = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(300)])
     is_active = models.BooleanField(default=True)
+
+    objects = TennisPlayerManager()
 
     def __str__(self):
         return self.full_name
