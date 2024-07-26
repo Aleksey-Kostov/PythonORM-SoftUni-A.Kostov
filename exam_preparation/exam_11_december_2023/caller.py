@@ -60,6 +60,8 @@ def get_tournaments_by_surface_type(surface=None):
     tournaments = (Tournament.objects.prefetch_related('matches').annotate(num_matches=Count('matches'))
                    .filter(surface_type__icontains=surface)).order_by('-start_date')
 
+    # print(tournaments)
+
     if tournaments is None:
         return ''
 
@@ -72,7 +74,10 @@ def get_tournaments_by_surface_type(surface=None):
 
 
 def get_latest_match_info():
-    latest_match_info = Match.objects.prefetch_related('players').order_by('date_played', '-id').first()
+    latest_match_info = Match.objects.prefetch_related('players').order_by('-date_played', '-id').first()
+
+    # for match in latest_match_info.players.all():
+    #     print(match)
 
     if latest_match_info is None:
         return ''
@@ -86,3 +91,18 @@ def get_latest_match_info():
             f"tournament: {latest_match_info.tournament.name}, score: {latest_match_info.score}, players: "
             f"{player1_full_name} vs {player2_full_name}, "
             f"winner: {winner_full_name}, summary: {latest_match_info.summary}")
+
+
+def get_matches_by_tournament(tournament_name=None):
+    match_all = (Match.objects.select_related("tournament", "winner")
+                 .filter(tournament__name__exact=tournament_name)
+                 .order_by('-date_played'))
+    if not match_all:
+        return 'No matches found.'
+
+    result = []
+
+    [result.append(f"Match played on: {m.date_played}, score: {m.score}, "
+                   f"winner: {'TBA' if not m.winner else m.winner.full_name}") for m in match_all]
+
+    return '\n'.join(result)
