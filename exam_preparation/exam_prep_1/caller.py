@@ -61,7 +61,7 @@ def get_actors_by_movies_count():
     top_actors = (Actor.objects.prefetch_related('actor_movies').annotate(num_movies=Count('actor_movies'))
                   .order_by('-num_movies', 'full_name'))[:3]
 
-    if not top_actors or not top_actors.num_movies:
+    if not top_actors or not top_actors[0].num_movies:
         return ''
 
     result = []
