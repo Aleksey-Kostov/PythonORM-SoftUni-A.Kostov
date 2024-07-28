@@ -87,4 +87,3 @@ def get_top_rated_awarded_movie():
             f"Starring actor: {starring_actor_full_name}. "
             f"Cast: {cast}.")
 
-
