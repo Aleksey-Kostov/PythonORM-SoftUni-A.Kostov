@@ -60,7 +60,9 @@ def get_tournaments_by_surface_type(surface=None):
     tournaments = (Tournament.objects.prefetch_related('matches').annotate(num_matches=Count('matches'))
                    .filter(surface_type__icontains=surface)).order_by('-start_date')
 
-    # print(tournaments)
+    # for t in tournaments:
+    #     for m in t.matches.all():
+    #         print(m.score)
 
     if tournaments is None:
         return ''
@@ -106,3 +108,6 @@ def get_matches_by_tournament(tournament_name=None):
                    f"winner: {'TBA' if not m.winner else m.winner.full_name}") for m in match_all]
 
     return '\n'.join(result)
+
+
+# print(get_tournaments_by_surface_type('mountain'))
