@@ -56,3 +56,4 @@ def get_top_actor():
 
     return (f"Top Actor: {actor.full_name}, starring in movies: {movies_title}, "
             f"movies average rating: {actor.movies_avg_rating:.1f}")
+
