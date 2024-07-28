@@ -63,6 +63,7 @@ def get_tournaments_by_surface_type(surface=None):
     # for t in tournaments:
     #     for m in t.matches.all():
     #         print(m.score)
+    # [print(m.score) for m in tournaments[0].matches.all()]
 
     if tournaments is None:
         return ''
@@ -110,4 +111,4 @@ def get_matches_by_tournament(tournament_name=None):
     return '\n'.join(result)
 
 
-# print(get_tournaments_by_surface_type('mountain'))
+print(get_tournaments_by_surface_type('mountain'))
