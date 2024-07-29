@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MinLengthValidator, MinValueValidator, MaxValueValidator
 
+from main_app.custom_manager import ProfileManager
+
 
 class Profile(models.Model):
     full_name = models.CharField(max_length=100, validators=[MinLengthValidator(2)])
@@ -9,6 +11,8 @@ class Profile(models.Model):
     address = models.TextField()
     is_active = models.BooleanField(default=True)
     creation_date = models.DateTimeField(auto_now_add=True)
+
+    objects = ProfileManager()
 
     def __str__(self):
         return self.full_name
