@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MinLengthValidator, MinValueValidator, MaxValueValidator
 
+from main_app.custom_manager import AuthorManager
+
 
 class Author(models.Model):
     full_name = models.CharField(max_length=100, validators=[MinLengthValidator(3)])
@@ -8,6 +10,11 @@ class Author(models.Model):
     is_banned = models.BooleanField(default=False)
     birth_year = models.PositiveIntegerField(validators=[MaxValueValidator(2005), MinValueValidator(1900)])
     website = models.URLField(blank=True, null=True)
+
+    objects = AuthorManager()
+
+    def __str__(self):
+        return self.full_name
 
 
 class Article(models.Model):
@@ -21,6 +28,9 @@ class Article(models.Model):
     category = models.CharField(choices=CategoryChoice, max_length=10, default='Technology')
     authors = models.ManyToManyField(Author, related_name='author_articles')
     published_on = models.DateTimeField(auto_now_add=True, editable=False)
+
+    def __str__(self):
+        return self.title
 
 
 class Review(models.Model):
