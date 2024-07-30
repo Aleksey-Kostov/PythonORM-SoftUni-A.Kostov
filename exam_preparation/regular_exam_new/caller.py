@@ -52,14 +52,50 @@ def get_top_reviewer():
 
 
 def get_latest_article():
-    articles = ((Article.objects.prefetch_related('authors', 'article_reviews')
-                .annotate(num_reviews=Count('article_reviews'), avg_rating=Avg('article_reviews__rating')))
+    articles = (Article.objects.prefetch_related('authors', 'article_reviews')
+                .annotate(num_reviews=Count('article_reviews'), avg_rating=Avg('article_reviews__rating'))
                 .order_by('-published_on')
                 .first())
     if articles is None:
         return ''
 
+    rating = articles.avg_rating or 0.0
+
     articles_authors_full_name = ', '.join(a.full_name for a in articles.authors.all().order_by('full_name'))
 
-    return (f"The latest article is: {articles}. Authors: {articles_authors_full_name}. "
-            f"Reviewed: {articles.num_reviews} times. Average Rating: {articles.avg_rating:.2f}.")
+    return (f"The latest article is: {articles.title}. Authors: {articles_authors_full_name}. "
+            f"Reviewed: {articles.num_reviews} times. Average Rating: {rating:.2f}.")
+
+# print(get_latest_article())
+
+def get_top_rated_article():
+    top_article = (Article.objects.prefetch_related('article_reviews')
+                   .annotate(avg_rating=Avg('article_reviews__rating'), num_reviews=Count('article_reviews'))
+                   .order_by('-avg_rating', 'title').first())
+
+    if top_article is None or top_article.num_reviews == 0:
+        return ''
+
+    # avg_rating = top_article.avg_rating or 0.0
+
+    return (f"The top-rated article is: {top_article.title}, with an average rating of {top_article.avg_rating:.2f}, "
+            f"reviewed {top_article.num_reviews} times.")
+
+
+# print(get_top_rated_article())
+def ban_author(email=None):
+    if email is None:
+        return 'No authors banned.'
+
+    author = (Author.objects.prefetch_related('author_reviews').annotate(num_reviews=Count('author_reviews')).
+              filter(email__exact=email).first())
+
+    if author is None:
+        return 'No authors banned.'
+
+    author.is_banned = True
+    author.save()
+    author.author_reviews.all().delete()
+    return f"Author: {author.full_name} is banned! {author.num_reviews} reviews deleted."
+
+# print(ban_author('kolio'))
