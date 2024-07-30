@@ -1,3 +1,4 @@
-from django.contrib import admin
+from django.core.validators import MinLengthValidator, MinValueValidator, MaxValueValidator
+from django.db import models
 
-# Register your models here.
+
