@@ -24,7 +24,7 @@ def get_tennis_players(search_name=None, search_country=None):
     else:
         tennis_player = TennisPlayer.objects.filter(country__icontains=search_country).order_by('ranking')
 
-    if tennis_player is None:
+    if not tennis_player:
         return ''
 
     result = []
@@ -40,7 +40,7 @@ def get_top_tennis_player():
                      .order_by('-num_wins', 'full_name')
                      .first())
 
-    if tennis_player is None:
+    if not tennis_player:
         return ''
 
     return f'Top Tennis Player: {tennis_player.full_name} with {tennis_player.num_wins} wins.'
@@ -51,7 +51,7 @@ def get_tennis_player_by_matches_count():
                      .order_by('-matches_count', 'ranking')
                      .first())
 
-    if tennis_player is None or tennis_player.matches_count == 0:
+    if not tennis_player or tennis_player.matches_count == 0:
         return ''
 
     return f"Tennis Player: {tennis_player.full_name} with {tennis_player.matches_count} matches played."
@@ -64,7 +64,7 @@ def get_tournaments_by_surface_type(surface=None):
                    .annotate(num_matches=Count('tournament_matches'))
                    .filter(surface_type__icontains=surface).order_by('-start_date'))
 
-    if tournaments is None:
+    if not tournaments:
         return ''
 
     result = []
@@ -75,10 +75,10 @@ def get_tournaments_by_surface_type(surface=None):
 
 
 def get_latest_match_info():
-    latest_match = (Match.objects.select_related('tournament').prefetch_related('players_matches')
+    latest_match = (Match.objects.select_related('tournament').prefetch_related('players')
                     .order_by('-date_played', '-id').first())
 
-    if latest_match is None:
+    if not latest_match:
         return ''
 
     players = latest_match.players.order_by('full_name')
@@ -94,4 +94,22 @@ def get_latest_match_info():
 
 
 def get_matches_by_tournament(tournament_name=None):
-    pass
+
+    if tournament_name is None:
+        return 'No matches found.'
+
+    matches = (Match.objects.select_related('tournament', 'winner')
+               .filter(tournament__name__exact=tournament_name)
+               .order_by('-date_played'))
+
+    if not matches:
+        return 'No matches found.'
+
+    result = []
+
+    [result.append(f"Match played on: {m.date_played}, score: {m.score}, "
+                   f"winner: {'TBA' if not m.winner else m.winner.full_name}") for m in matches]
+
+    return '\n'.join(result)
+
+# print(get_matches_by_tournament('kiro'))
