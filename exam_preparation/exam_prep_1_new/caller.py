@@ -41,7 +41,7 @@ def get_directors(search_name=None, search_nationality=None):
 
 
 def get_top_director():
-    director = Director.objects.get_directors_by_movies_count()
+    director = Director.objects.get_directors_by_movies_count().first()
 
     if director is None:
         return ''
@@ -53,13 +53,11 @@ def get_top_actor():
     actors = (Actor.objects.prefetch_related('starring_actor_movies')
               .annotate(num_starring=Count('starring_actor_movies'),
                         movies_avg_rating=Avg('starring_actor_movies__rating'))
-              .order_by('-num_starring', 'full_name')
-              .first())
-    if not actors or not actors.num_starring:
+              .order_by('-num_starring', 'full_name').first())
+    if actors is None or not actors.num_starring:
         return ''
 
-    movies_title = ', '.join(a.title for a in actors.starring_actor_movies.all() if a)
+    movies_title = ', '.join(movie.title for movie in actors.starring_actor_movies.all() if movie)
 
-    return (f"Top Actor: {actors.full_name}, "
-            f"starring in movies: {movies_title}, "
+    return (f"Top Actor: {actors.full_name}, starring in movies: {movies_title}, "
             f"movies average rating: {actors.movies_avg_rating:.1f}")
