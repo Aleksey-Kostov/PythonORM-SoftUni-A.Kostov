@@ -1,12 +1,19 @@
 from django.core.validators import MinLengthValidator, MinValueValidator, MaxValueValidator
 from django.db import models
 
+from main_app.custom_manager import DirectorManager
+
 
 class Director(models.Model):
     full_name = models.CharField(max_length=120, validators=[MinLengthValidator(2)])
     birth_date = models.DateField(default='1900-01-01')
     nationality = models.CharField(max_length=50, default='Unknown')
     years_of_experience = models.SmallIntegerField(validators=[MinValueValidator(0)], default=0)
+
+    objects = DirectorManager()
+
+    def __str__(self):
+        return self.full_name
 
 
 class Actor(models.Model):
@@ -15,6 +22,9 @@ class Actor(models.Model):
     nationality = models.CharField(max_length=50, default='Unknown')
     is_awarded = models.BooleanField(default=False)
     last_updated = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.full_name
 
 
 class Movie(models.Model):
