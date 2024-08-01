@@ -5,8 +5,8 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm_skeleton.settings")
 django.setup()
 
-from main_app.models import Director, Actor
-from django.db.models import Count, Avg
+from main_app.models import Director, Actor, Movie
+from django.db.models import Count, Avg, F
 
 
 def get_directors(search_name=None, search_nationality=None):
@@ -61,3 +61,52 @@ def get_top_actor():
 
     return (f"Top Actor: {actors.full_name}, starring in movies: {movies_title}, "
             f"movies average rating: {actors.movies_avg_rating:.1f}")
+
+
+def get_actors_by_movies_count():
+    actors = (Actor.objects.prefetch_related('actors_movies')
+              .annotate(num_movies=Count('actors_movies'))
+              .order_by('-num_movies', 'full_name')[:3])
+
+    if not actors or actors[0].num_movies == 0:
+        return ''
+
+    result = []
+
+    [result.append(f"{a.full_name}, participated in {a.num_movies} movies") for a in actors]
+
+    return '\n'.join(result)
+
+
+# print(get_actors_by_movies_count())
+
+
+def get_top_rated_awarded_movie():
+    movie = (Movie.objects.select_related('starring_actor')
+             .prefetch_related('actors')
+             .filter(is_awarded=True).order_by('-rating')
+             .first())
+
+    if movie is None:
+        return ""
+
+    starring_actor_full_name = 'N/A' if movie.starring_actor is None else movie.starring_actor.full_name
+    actors = ', '.join(a.full_name for a in movie.actors.order_by('full_name').all())
+
+    return (f"Top rated awarded movie: {movie.title}, "
+            f"rating: {movie.rating}. "
+            f"Starring actor: {starring_actor_full_name}. "
+            f"Cast: {actors}.")
+
+
+# print(get_top_rated_awarded_movie())
+def increase_rating():
+    movies = Movie.objects.filter(is_classic=True, rating__lt=10)
+
+    if not movies:
+        return 'No ratings increased.'
+
+    num_of_updated_movies = movies.count()
+    movies.update(rating=F("rating") + 0.1)
+
+    return f'Rating increased for {num_of_updated_movies} movies.'
