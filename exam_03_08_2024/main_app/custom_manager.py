@@ -6,3 +6,4 @@ class AstronautManager(models.Manager):
     def get_astronauts_by_missions_count(self):
         return (self.annotate(num_missions=Count('astronauts_missions'))
                 .order_by('-num_missions', 'phone_number'))
+
